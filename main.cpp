@@ -1,10 +1,10 @@
-// sam206 - vector - using Iterators
+// sam206 - vector - accessing elements using Iterators
 //
 // https://en.cppreference.com/w/cpp/container/vector
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
+//#include <algorithm>
 using namespace std;
 
 /**
@@ -12,11 +12,11 @@ using namespace std;
  *  An Iterator is an object that we can use to point at a position in a vector.
  *  Iterators can be used to move along through the elements in an array by
  *  incrementing the iterator.  We can call methods from the vector class to get
- *  an iterators to a vector's elements.
+ *  an iterator to a vector's elements.
  *
  * This sample shows:
  * - iterating over elements of vector using Iterator
- * - declaring variable using "auto"
+ * - declaring iterator variable/object using "auto"
  * - using vector functions that depend on iterators
  * - using the Algorithms Library <algorithm> to process vector
  *      functions:  all_of(), none_of(), find(), find_if()
@@ -34,7 +34,7 @@ int main()
     cout << "sam206 - vector - using Iterators" << endl;
 
     // Create a vector called "ages_vector" to store the ages of students in a class.
-    // The "ages_vector" is an object that is of type vector.
+    // The "ages_vector" is an object that is of type "vector of int".
 
     vector<int> ages_vector;  // declare an object that is a vector of int - initially empty
 
@@ -43,24 +43,25 @@ int main()
     display(ages_vector);
 
     // Let's say we want to use an iterator to iterate across (move across) each
-    // element in the vector and print out the element.
-    // We use the function begin(), to get the iterator that initially points to the beginning.
+    // element in the vector and print out each element.
+    // We use the function begin(), to get an iterator that initially points
+    // to the beginning of the vector.
 
     // We store the iterator in a variable of type Iterator (called "iter")
     // Defining the types for iterator can be complex, but luckily, C++ allows
-    // us to use the "auto" keyword, which declares the right type for the variable.
+    // us to use the "auto" keyword, which declares the right type for the iterator variable.
     // "auto" deduces the right type from the return type of function begin().
 
     auto iter = ages_vector.begin();
 
 // https://en.cppreference.com/w/cpp/container/vector/begin
 
-    // Now we have an iterator pointing at the first element in the vector.
+    // Now we have an iterator that points at the first element in the vector.
     // Let's use the iterator to access the element and output it.
 
     cout << "Dereferencing the Iterator to get first element in vector, value = " << *iter << endl;
 
-    // The star is the "dereference" operator, as it gets the thing that the iterator is referring to.
+    // The star "*" is the "dereference" operator, as it gets the thing that the iterator is referring to.
     // The Iterator points at the first element, so *iter, gets the element that the iterator points at.
 
     // An Iterator can be incremented - so that it moves forward to point at the next element of the vector.
@@ -73,8 +74,8 @@ int main()
     // In our for loop, we will initialize an iterator to point at the first element.
     // Each time, we check that our iterator (iter) is not equal to the end iterator.
     // We get the end iterator position by calling end().
-    // Note that the iterator is considered at the end when it points just beyond
-    // the last element.
+    // Note that the iterator is considered at the end when it points
+    // just beyond the last element.
 
     cout << "Output vector elements using for loop and iterator : ";
     for (auto iter = ages_vector.begin(); iter != ages_vector.end(); ++iter){
@@ -82,50 +83,50 @@ int main()
     }
     cout << endl;
 
-    // Alternative way of doing the same thing is to use the
-    // begin() and end() functions from <algorithm> to acquire iterators.
-    //
-    cout << "Output vector elements using for loop and iterators (from <algorithm>) : ";
-    for (auto iter = begin(ages_vector); iter != end(ages_vector); ++iter) {
-        cout << *iter << ", " ;  // dereference iterator to get the element
-    }
-    cout << endl;
 
-    // Below we use cbegin() and cend() which gives us iterators that
-    // point to "constant" elements. So, we are prevented from changing them accidentally.
+
+    // Below we use cbegin() and cend() [since C++ 14] which gives us iterators that
+    // point to "constant" elements.
+    // This helps us to avoid accidental modification of the vector elements.
     // We should really always use them, unless we want to update the element
     // that an iterator points to.
 
-    // use the count() function from <algorithm> library to count elements in vector
+    // Use the count() function from <algorithm> library to count elements in vector
     // Let's count the number of ages in the vector that are = 18
     int age = 21;
+
     // the count() function requires us to pass in two iterators :
     // an iterator pointing at the beginning of where we want to search in the vector, and
     // an iterator pointing at then end of where we want to search in the vector.
-    //
+    // https://cplusplus.com/reference/algorithm/count/
+
     int num_items = count(ages_vector.cbegin(), ages_vector.cend(), age);  // counts all matches (=18) from beginning to end of vector
     cout << "Count of students aged " << age << " = " << num_items << endl;
 
     // use the count_if() function from <algorithm> library
     // and a lambda expression to count student ages that are under 18
+    // The predicate here is  a UnaryPredicate - as it takes one parameter only (i)
+    // and returns a boolean value (true or false)
+    // https://cplusplus.com/reference/algorithm/
+
     int count_under18 = count_if(ages_vector.begin(), ages_vector.end(), [] (int i) { return i < 18; } );
     cout << "Count of students aged under 18 = " << count_under18 << '\n';
 
     // remove the last element in a vector
-    if(!ages_vector.empty())
+    if( !ages_vector.empty() )
     {
         ages_vector.pop_back();   // removes the last element from a vector
     }
 
-    // We use the erase() member function to remove either :
+    // We use the member function erase() to remove either :
     // - an element at a position specified by an iterator or
     // - a range of elements specified by two iterators (start and end of range)
-    // This operation is usually expensive (unless removing the end element)
+    // This operation is usually expensive (unless removing only the end element(s))
     //
 
     cout << "Vector content before erasing the third element" << endl;
     display(ages_vector);
-    ages_vector.erase(ages_vector.begin()+2);  // removes the third element in the vector
+    ages_vector.erase( ages_vector.begin() + 2 );  // removes the third element in the vector
     cout << "Vector content AFTER erasing the third element" << endl;
     display(ages_vector);
 
