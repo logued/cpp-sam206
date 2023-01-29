@@ -188,6 +188,7 @@ int main()
 
     // did we find the element searched for ?
     // i.e. did the iterator run past the end of the vector or not ?
+    //
     if(  result_iter1 != end(ages_vector))
         cout << "Found at least one value 17\n";
     else
