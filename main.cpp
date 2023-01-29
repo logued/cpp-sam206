@@ -162,11 +162,12 @@ int main()
     ////// Processing vectors using functions from the          //////
     ////// Algorithms Library <algorithm> and lambda functions  //////
 
-    // Check that all students in the class are older than 16.
-    // Check the range (begin -> end) using a lambda predicate to check each element
-    // The "i>16" is called the predicate - evaluating to true or false.
+    // Check that "all of" the student ages are greater than 16.
+    // Every element in the range (begin -> end) is tested using the
+    // lambda predicate "i>16".
+    // all_of() returns true if all of the ages are > 16.
     //
-    if ( all_of(ages_vector.cbegin(), ages_vector.cend(), [](int i){ return i > 16; }) )
+    if ( all_of( ages_vector.cbegin(), ages_vector.cend(), [](int i){ return i > 16; } ) )
         cout << "all_of() : All values in ages_vector are greater than 16\n";
     else
         cout << "all_of() : One or more values are not greater than 16" << endl;
@@ -200,6 +201,19 @@ int main()
     auto result_iter2 = find_if( begin(ages_vector), end(ages_vector), is_even ); // call find_if() to find elements that satisfy the is_even lambda
 
     (result_iter2 != end(ages_vector))? cout << " found one value that satisfied the is_even lambda expression \n" : cout << "NO even values found" << endl;
+
+    // Vectors can be compared using relational operators:  ==, !=, <, >, <=, >=
+    // https://cplusplus.com/reference/vector/vector/operators/
+    // In C++ these operators (e.g. ==) are OVERLOADED so that they work
+    // correctly for vectors.  They compare the contents of two arrays.
+
+    vector<int> lottoDraw { 02,10,13,22,35,47 }; // initialization list
+    vector<int> myNumbers { 02,10,13,22,35,47 };
+
+    if( lottoDraw == myNumbers)
+        cout << "Horray, I have won the lotto" << endl;
+    else
+    cout << "No luck today" << endl;
 
     cout << "Program finished - goodbye." << endl;
 }
