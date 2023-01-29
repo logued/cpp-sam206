@@ -136,7 +136,7 @@ int main()
     display(ages_vector);
 
     // Iterate through the elements of a vector
-    // Test each element and remove the element if it is even
+    // Test each element and remove the element if it is even.
     // Important: when an element is removed, the vector is restructured
     //            and the current iterator becomes invalid.  (Invalidated)
     // So, to continue iterating over the remaining elements we need a new
@@ -144,11 +144,11 @@ int main()
     // points to the element directly after the one that was removed. So, we
     // use this iterator to continue in our for loop.
     //
-    cout << "Iterating over vector to remove even elements" << endl;
-    for (std::vector<int>::iterator iter = ages_vector.begin(); iter != ages_vector.end();)
+    cout << "Iterating over vector to remove EVEN elements" << endl;
+    for ( vector<int>::iterator iter = ages_vector.begin(); iter != ages_vector.end();  )
     {
         if (*iter % 2 == 0)
-            iter = ages_vector.erase(iter);
+            iter = ages_vector.erase(iter);  // remove element & obtain new iterator
         else
             ++iter;
     }
@@ -194,8 +194,10 @@ int main()
         cout << "NO value 17 in vector " << endl;
 
     // Searching for the first even number in a vector.
-    // First define a lambda ( a function that will test each element to see if it is even)
+    // First define a lambda with a predicate function that will
+    // test each element to see if it is even.
     // (is_even is a pointer to a function - we will discuss later)
+    //
     auto is_even = [](int i){ return i%2 == 0; };   // define a lambda function and store in variable
 
     auto result_iter2 = find_if( begin(ages_vector), end(ages_vector), is_even ); // call find_if() to find elements that satisfy the is_even lambda
