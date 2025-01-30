@@ -21,6 +21,7 @@ using namespace std;
  * - using the Algorithms Library <algorithm> to process vector
  *      functions:  all_of(), none_of(), find(), find_if()
  *                  use of lambdas, use of predicates
+ *
  */
 
 // function prototype
@@ -111,6 +112,14 @@ int main()
 
     int count_under18 = count_if(ages_vector.begin(), ages_vector.end(), [] (int i) { return i < 18; } );
     cout << "Count of students aged under 18 = " << count_under18 << '\n';
+    // Lambda expression:  "[] (int i) { return i < 18; }"
+    // A "lambda" is a type of function that does not have a name.
+    // the count_if() function iterates over all elements in the vector, from beginning to end.
+    // The function count_if()  applies the "lambda" to each element as it meets them.
+    // This lambda applies the "predicate" ("i<18") - to test whether each element (age)
+    // is less than 18 or not.  It returns true or false in each case.
+    // count_if increments a count for each time "true" is returned, and
+    // finally returns the count.
 
     // remove the last element in a vector
     if( !ages_vector.empty() )
