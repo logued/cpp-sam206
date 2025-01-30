@@ -1,10 +1,10 @@
-// sam206 - vector - accessing elements using Iterators
+// sam206 - vector - accessing elements using Iterators- Jan 2025
 //
 // https://en.cppreference.com/w/cpp/container/vector
 
 #include <iostream>
 #include <vector>
-//#include <algorithm>
+#include <algorithm>
 using namespace std;
 
 /**
@@ -52,9 +52,9 @@ int main()
     // us to use the "auto" keyword, which declares the right type for the iterator variable.
     // "auto" deduces the right type from the return type of function begin().
 
-    auto iter = ages_vector.begin();
+    auto iter = ages_vector.begin();  // the type for the iter is automatically applied
 
-// https://en.cppreference.com/w/cpp/container/vector/begin
+    // https://en.cppreference.com/w/cpp/container/vector/begin
 
     // Now we have an iterator that points at the first element in the vector.
     // Let's use the iterator to access the element and output it.
@@ -208,7 +208,7 @@ int main()
     // Vectors can be compared using relational operators:  ==, !=, <, >, <=, >=
     // https://cplusplus.com/reference/vector/vector/operators/
     // In C++ these operators (e.g. ==) are OVERLOADED so that they work
-    // correctly for vectors.  They compare the contents of two arrays.
+    // correctly for vectors.  They compare the contents of two vectors.
 
     vector<int> lottoDraw { 02,10,13,22,35,47 }; // initialization list
     vector<int> myNumbers { 02,10,13,22,35,47 };
